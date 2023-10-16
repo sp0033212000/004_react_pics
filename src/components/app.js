@@ -48,20 +48,27 @@ const App = () => {
     }
   }, []);
 
-  const onSearch = useCallback(async (term) => {
-    const res = await fetcher(term);
+  const onSearch = useCallback(
+    async (term) => {
+      const res = await fetcher(term);
 
-    page.current = 1;
-    totalPage.current = res.total_pages;
-    cacheTerm.current = term;
-    setImages((prev) => prev.concat(res));
-  }, []);
+      page.current = 1;
+      totalPage.current = res.total_pages;
+      cacheTerm.current = term;
+      setImages((prev) => prev.concat(res.results));
+    },
+    [fetcher],
+  );
 
   useOnEndReached({
     onEndReached: async () => {
-      page.current += 1;
-      const res = await fetcher(cacheTerm.current, page.current);
-      setImages((prev) => prev.concat(res));
+      try {
+        page.current += 1;
+        const res = await fetcher(cacheTerm.current, page.current);
+        setImages((prev) => prev.concat(res.results));
+      } catch (e) {
+        page.current -= 1;
+      }
     },
     disabled:
       images.length <= 0 || isLoading || page.current >= totalPage.current,

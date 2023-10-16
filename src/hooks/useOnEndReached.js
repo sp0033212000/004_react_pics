@@ -9,8 +9,9 @@ const useOnEndReached = ({ onEndReached, disabled, wait = 16 }) => {
   );
 
   useEffect(() => {
+    const cancel = throttledOnEndReached.current.cancel;
     return () => {
-      throttledOnEndReached.current.cancel();
+      cancel();
     };
   }, []);
 
@@ -47,7 +48,7 @@ const useOnEndReached = ({ onEndReached, disabled, wait = 16 }) => {
         html.removeEventListener("wheel", _onEndReached);
       }
     };
-  }, [disabled]);
+  }, [disabled, _onEndReached]);
 };
 
 export default useOnEndReached;
