@@ -72,7 +72,7 @@ const App = () => {
     },
     disabled:
       images.length <= 0 || isLoading || page.current >= totalPage.current,
-    wait: 1000,
+    wait: 3000,
   });
 
   return (
