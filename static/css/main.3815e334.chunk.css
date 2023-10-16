@@ -1,0 +1,2 @@
+*{margin:0;padding:0;box-sizing:border-box}html{width:100vh;height:-webkit-fill-available;height:stretch;overflow:scroll}body{min-width:100%;min-height:100%}.image-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));grid-auto-rows:10px}.image-list img{width:250px}
+/*# sourceMappingURL=main.3815e334.chunk.css.map */
